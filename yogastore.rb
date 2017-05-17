@@ -42,11 +42,6 @@ def select_product
     selected_product = gets.chomp.to_i
 end
 
-def shop_or_checkout
-  puts "Thank you, would you like to continue shopping(1) or proceed to check out(2)?('1' or '2')"
-  shop_answer = gets.chomp
-end
-
 def add_product_to_cart(reference_number)
 product = look_up_product(reference_number)
   if product != nil
@@ -79,6 +74,11 @@ def print_cart
   end
 end
 
+def shop_or_checkout
+  puts "Would you like to continue shopping(1) or proceed to check out(2)?('1' or '2')"
+  shop_answer = gets.chomp
+end
+
 #actual shop experience
 welcome_message
 print_progress_bar
@@ -88,7 +88,6 @@ loop do
   reference_number = select_product
   add_product_to_cart(reference_number)
   print_cart
-  # shop_or_checkout
-  break
+  break unless shop_or_checkout == 1
   # break unless shop_or_checkout
 end
