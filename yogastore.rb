@@ -1,4 +1,4 @@
-@shopping_cart = {}
+@shopping_cart = []
 
 @products = [
   { reference_number: 1231, name: "Super Lite Mat", price: 10 },
@@ -10,3 +10,11 @@
   { reference_number: 1237, name: "Bring Yoga To Life", price: 30 },
   { reference_number: 1238, name: "Light On Yoga", price: 10 }
 ]
+
+def welcome_message
+  puts "Hello, how can I help you today?"
+end
+
+def items_on_sale
+  puts "These are our items for sale today"
+end
