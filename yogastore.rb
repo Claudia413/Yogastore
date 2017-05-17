@@ -1,3 +1,8 @@
+def print_divider
+  puts "*" * 40
+  puts "\n"
+end
+
 @shopping_cart = []
 
 @products = [
@@ -14,14 +19,24 @@
 #Messages for customer
 
 def welcome_message
-  puts "Hello, how can I help you today?"
+  puts "Hello, Welcome to the Yogastore."
 end
 
 def items_on_sale
   puts "These are our items for sale today"
+  @products.each do |product|
+    puts "Reference nr.: #{product[:reference_number]}"
+    puts "Product: #{product[:name]}"
+    puts "Price: #{product[:price]} EUR"
+    print_divider
+  end
 end
 
 def shop_or_checkout
   puts "Thank you, would you like to continue shopping(1) or proceed to check out(2)?('1' or '2')"
   shop_answer = gets.chomp
 end
+
+#actual shop experience
+welcome_message
+items_on_sale
