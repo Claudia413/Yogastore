@@ -39,7 +39,7 @@ end
 
 def select_product
   puts "Select any item to purchase by its reference_number:"
-  gets.chomp.to_i
+    selected_product = gets.chomp.to_i
 end
 
 def shop_or_checkout
@@ -47,10 +47,23 @@ def shop_or_checkout
   shop_answer = gets.chomp
 end
 
-def add_product_to_cart
-  # case shop_answer
-  # when 1231
+def add_product_to_cart(reference_number)
+product = look_up_product(reference_number)
+  if product != nil
+    @shopping_cart << product
+    puts "Awesome. '#{product[:name]}' has been added to the cart!"
+  else
+    puts "That is not a valid reference_number. Please try again."
+    print_divider
+  end
+end
 
+def look_up_product(reference_number)
+  @products.each do |product|
+    if product[:reference_number] == reference_number.to_i
+      return product
+    end
+  end
 end
 
 def print_cart
@@ -62,7 +75,7 @@ def print_cart
     puts "Price: #{product[:price]} EUR"
     print_divider
     total_price += product[:price]
-    puts "Total amount in Euros:" + total_price
+    puts "Total amount in Euros: #{total_price}"
   end
 end
 
@@ -72,9 +85,10 @@ print_progress_bar
 loop do
   items_on_sale
   print_progress_bar
-  select_product
-  add_product_to_cart
+  reference_number = select_product
+  add_product_to_cart(reference_number)
   print_cart
+  # shop_or_checkout
   break
   # break unless shop_or_checkout
 end
