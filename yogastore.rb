@@ -3,6 +3,11 @@ def print_divider
   puts "\n"
 end
 
+def print_progress_bar
+  3.times { sleep 0.5; print "." }
+  puts "\n"
+end
+
 @shopping_cart = []
 
 @products = [
@@ -32,11 +37,44 @@ def items_on_sale
   end
 end
 
+def select_product
+  puts "Select any item to purchase by its reference_number:"
+  gets.chomp.to_i
+end
+
 def shop_or_checkout
   puts "Thank you, would you like to continue shopping(1) or proceed to check out(2)?('1' or '2')"
   shop_answer = gets.chomp
 end
 
+def add_product_to_cart
+  # case shop_answer
+  # when 1231
+
+end
+
+def print_cart
+  puts "These are the items in your shopping cart"
+  @shopping_cart.each do |product|
+    total_price = 0
+    puts "Reference nr.: #{product[:reference_number]}"
+    puts "Product: #{product[:name]}"
+    puts "Price: #{product[:price]} EUR"
+    print_divider
+    total_price += product[:price]
+    puts "Total amount in Euros:" + total_price
+  end
+end
+
 #actual shop experience
 welcome_message
-items_on_sale
+print_progress_bar
+loop do
+  items_on_sale
+  print_progress_bar
+  select_product
+  add_product_to_cart
+  print_cart
+  break
+  # break unless shop_or_checkout
+end
